@@ -1,0 +1,41 @@
+# Dépendances et sorties de compilation
+node_modules/
+/dist/
+*.tsbuildinfo
+
+# Tests et caches locaux
+coverage/
+.vite/
+.cache/
+playwright-report/
+test-results/
+
+# Journaux
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables d’environnement locales ; conserver les exemples sans secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Réglages personnels des éditeurs et outils
+.idea/
+.vscode/
+/.codex/
+*.swp
+*.swo
+*~
+
+# Fichiers système
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Les sources, package-lock.json, public/assets/ et .openai/hosting.json
+# doivent rester versionnés.
