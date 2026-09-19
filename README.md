@@ -82,6 +82,23 @@ dist/server/index.js
 dist/.openai/hosting.json
 ```
 
+## Déploiement sur Vercel
+
+Le fichier [`vercel.json`](vercel.json) définit les réglages de compilation et de publication :
+
+| Réglage | Valeur |
+| --- | --- |
+| Framework Preset | `Vite` |
+| Build Command | `npm run build` |
+| Output Directory | `dist/client` |
+| Root Directory | Le dossier contenant `package.json` et `vercel.json` ; racine du dépôt dans cette structure. |
+
+Vercel doit publier **`dist/client`**, qui contient `index.html`, les scripts, les styles et les textures. Publier `dist` ne place pas la page d’accueil à la racine du site et peut provoquer une erreur 404 malgré une compilation réussie. Les fichiers de `dist/server` et `dist/.openai` restent destinés à Sites.
+
+Après avoir envoyé la configuration sur GitHub, vérifier que le nouveau déploiement Vercel utilise bien ce commit. Si le dépôt est connecté à Vercel, l’envoi sur une branche déclenche normalement un déploiement selon les réglages du projet. Relancer un ancien déploiement ne récupère pas nécessairement le nouveau commit.
+
+En cas de 404 persistante, vérifier le **Root Directory**, le commit déployé et la présence de `index.html` à la racine du dossier publié. Voir le [guide de diagnostic Vercel](https://vercel.com/kb/guide/why-is-my-deployed-project-giving-404).
+
 ## Services externes et ressources
 
 La recherche de lieux et l’identification d’un lieu à partir de coordonnées utilisent **Photon**, à l’adresse `https://photon.komoot.io`, avec des données OpenStreetMap. Les recherches et les coordonnées à identifier sont donc transmises à ce service. En cas d’indisponibilité, les calculs locaux et la saisie manuelle de coordonnées restent utilisables.
@@ -101,4 +118,4 @@ Le fichier [`.gitignore`](.gitignore) exclut les dépendances installées, les c
 
 Conserver dans Git **`package-lock.json`**, les ressources de **`public/assets/`** et les fichiers de compatibilité Sites : **`.openai/hosting.json`**, **`worker/index.js`**, **`scripts/prepare-sites-build.mjs`** et **`tests/sites-worker.test.mjs`**.
 
-Le dépôt ne configure pas de déploiement automatique ni de publication sur GitHub Pages.
+Le dépôt contient les réglages de publication Vercel. Le déclenchement automatique dépend de la connexion Git configurée dans Vercel ; aucune publication sur GitHub Pages n’est configurée.
